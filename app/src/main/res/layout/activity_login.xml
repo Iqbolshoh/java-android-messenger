@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/sign_background"
+    tools:context=".LoginActivity">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvLogin"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:background="#039BE5" />
+
+                <TextView
+                    android:id="@+id/singInTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="50dp"
+                    android:fontFamily=""
+                    android:text="@string/sign_in"
+                    android:textColor="#337EDD"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingEnd="30dp"
+                android:paddingStart="50dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#c5c5c5">
+
+                    <EditText
+                        android:id="@+id/emailEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_bg_edit"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:paddingBottom="2dp"
+                        android:textColor="#2fa881"
+                        android:textCursorDrawable="@drawable/bg_input_cursor"
+                        android:textSize="13sp" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:paddingEnd="30dp"
+                android:paddingStart="50dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#c5c5c5">
+
+                    <EditText
+                        android:id="@+id/passwordEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_bg_edit"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:paddingBottom="10dp"
+                        android:textColor="#2fa881"
+                        android:textCursorDrawable="@drawable/bg_input_cursor"
+                        android:textSize="13sp" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="25dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/signupButton"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_shape"
+                    android:stateListAnimator="@drawable/state_list_animator_z"
+                    android:text="@string/sign_in"
+                    android:textColor="#ffff"
+                    android:elevation="8dp"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/signUpFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/cvLogin"
+        android:layout_alignTop="@id/cvLogin"
+        android:layout_marginEnd="-20dp"
+        android:layout_marginTop="25dp"
+        android:background="#fff"
+        android:backgroundTint="#039BE5"
+        android:src="@drawable/ic_signup"
+        android:transitionName="loginFab"
+        app:fabSize="normal" />
+
+
+
+</RelativeLayout>
+
+    <!--<EditText-->
+    <!--android:id="@+id/emailEditText"-->
+    <!--android:layout_width="250dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/email"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="20dp"-->
+    <!--android:padding="10dp"-->
+    <!--android:inputType="textEmailAddress"/>-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/passwordEditText"-->
+    <!--android:layout_width="250dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/password"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="20dp"-->
+    <!--android:padding="10dp"-->
+    <!--android:inputType="textPassword"/>-->
+
+    <!--<Button-->
+    <!--android:id="@+id/signupButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/sign_in"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_margin="20dp"-->
+    <!--android:padding="10dp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/signupTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/sign_up"/>-->

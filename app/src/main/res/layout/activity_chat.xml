@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/backToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:drawableStart="@drawable/arrow_back"
+            android:gravity="center|start"
+            android:text="@string/chats"
+            android:textColor="#337EDD"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/chatName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Серега Ким" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ECEFF1" />
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LoginActivity">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/messagesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="56dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom"
+            android:background="#f6f6f6">
+
+            <ImageView
+                android:id="@+id/action_select_image"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:padding="16dp"
+                app:srcCompat="@drawable/attach_file_icon_48dp" />
+
+            <EditText
+                android:id="@+id/messageEditText"
+                android:layout_width="295dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="56dp"
+                android:layout_marginRight="56dp"
+                android:background="@drawable/rounded_et"
+                android:gravity="center_vertical"
+                android:hint="@string/message"
+                android:imeOptions="actionSend"
+                android:padding="8dp"
+                android:paddingStart="15dp"
+                android:textColor="#e9c166" />
+
+            <ImageView
+                android:id="@+id/action_send_message"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="right"
+                android:padding="4dp"
+                android:paddingStart="18dp"
+                app:srcCompat="@drawable/icon_send_ios" />
+
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>
+
+
+
+
+

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Chat App</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="contacts">Contacts</string>
+    <string name="message">Message</string>
+    <string name="chats">Chats</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="search_for_users">Search for Contacts</string>
+</resources>

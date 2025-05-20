@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    >
+
+    <com.example.mikeygresl.template.MessageContainer
+        android:id="@+id/message_cell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_message_box"
+        android:maxWidth="220dp"
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:elevation="1dp"
+        >
+
+        <ImageView
+            android:id="@+id/message_image"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_launcher_background"
+            />
+
+        <TextView
+            android:id="@+id/message_sender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            tools:text="hello world"
+            android:visibility="gone"
+            style="@style/TextAppearance.AppCompat.Caption"
+            />
+
+        <TextView
+            android:id="@+id/message_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            tools:text="hello world"
+            style="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <TextView
+            android:id="@+id/message_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:layout_gravity="right"
+            tools:text="hello world"
+            style="@style/TextAppearance.AppCompat.Caption"
+            />
+
+    </com.example.mikeygresl.template.MessageContainer>
+
+</FrameLayout>
