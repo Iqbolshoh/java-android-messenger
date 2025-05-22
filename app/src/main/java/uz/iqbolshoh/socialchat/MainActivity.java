@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private EditText editTextMessage;
-    private Button buttonSend;
+    private Button buttonSend, buttonClear;  // Clear tugma qo'shildi
     private TextView textViewChat;
 
     private MessageDatabaseHelper dbHelper;
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSend = findViewById(R.id.buttonSend);
+        buttonClear = findViewById(R.id.buttonClear);  // Clear tugmasini bog'lash
         textViewChat = findViewById(R.id.textViewChat);
 
         dbHelper = new MessageDatabaseHelper(this);
@@ -46,18 +47,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        buttonClear.setOnClickListener(v -> {
+            dbHelper.clearAllMessages();  // DB ichidagi barcha xabarlarni o'chirish
+            loadMessages();               // UI ni yangilash
+            Toast.makeText(this, "Chat tozalandi!", Toast.LENGTH_SHORT).show();
+        });
+
         loadMessages();
     }
 
     private void saveUserMessageAndSendApi(String userText) {
-        // User xabarini DB ga saqlaymiz
+        // User xabarini DB ga saqlash
         Message userMessage = new Message();
         userMessage.content = userText;
         userMessage.isUser = true;
         userMessage.timestamp = System.currentTimeMillis();
         dbHelper.addMessage(userMessage);
 
-        loadMessages(); // Yangi user xabarini ko'rsatish uchun
+        loadMessages(); // Yangi user xabarini ko'rsatish
 
         // API ga so'rov yuborish, javobni olish va DB ga saqlash
         executor.execute(() -> {

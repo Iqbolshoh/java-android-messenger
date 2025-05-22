@@ -23,6 +23,12 @@
         android:hint="Xabar kiriting..." />
 
     <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tozalash" />
+
+    <Button
         android:id="@+id/buttonSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

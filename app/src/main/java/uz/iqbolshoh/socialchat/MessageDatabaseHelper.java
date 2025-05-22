@@ -25,6 +25,12 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public void clearAllMessages() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_MESSAGES, null, null);
+        db.close();
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_MESSAGES_TABLE = "CREATE TABLE " + TABLE_MESSAGES + "("
