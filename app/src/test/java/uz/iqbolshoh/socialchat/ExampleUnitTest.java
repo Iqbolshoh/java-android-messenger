@@ -1,4 +1,4 @@
-package uz.iqbolshoh.chat;
+package uz.iqbolshoh.socialchat;
 
 import org.junit.Test;
 

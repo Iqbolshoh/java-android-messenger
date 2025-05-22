@@ -1,4 +1,4 @@
-package uz.iqbolshoh.chat;
+package uz.iqbolshoh.socialchat;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("uz.iqbolshoh.chat", appContext.getPackageName());
+        assertEquals("uz.iqbolshoh.socialchat", appContext.getPackageName());
     }
 }
