@@ -4,8 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="@android:color/white">
 
+    <!-- Gradient background uchun container -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent" />
+
+    <!-- Prompt input -->
     <EditText
         android:id="@+id/editTextPrompt"
         android:layout_width="match_parent"
@@ -13,13 +21,19 @@
         android:hint="Enter your prompt"
         android:inputType="textMultiLine"
         android:minLines="3"
-        android:background="@android:drawable/editbox_background"
         android:padding="12dp"
         android:textColor="#000000"
         android:textColorHint="#888888"
-        android:textSize="16sp"
-        android:layout_marginBottom="12dp" />
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:backgroundTint="#BDBDBD"
+        android:background="@null"
+        android:elevation="2dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="10dp" />
 
+    <!-- Send button with inline selector -->
     <Button
         android:id="@+id/buttonSend"
         android:layout_width="wrap_content"
@@ -28,15 +42,17 @@
         android:layout_marginTop="16dp"
         android:text="Send"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="#3F51B5"
-        android:layout_marginBottom="12dp"
-        android:elevation="4dp" />
+        android:elevation="4dp"
+        android:background="@android:color/transparent"
+        android:stateListAnimator="@null"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless" />
 
+    <!-- Loading bar -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -45,6 +61,7 @@
         android:layout_marginTop="16dp"
         android:visibility="gone" />
 
+    <!-- Response output -->
     <TextView
         android:id="@+id/textViewResponse"
         android:layout_width="match_parent"
@@ -56,7 +73,7 @@
         android:textSize="16sp"
         android:elevation="2dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#E0E0E0"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:backgroundTint="#E0E0E0" />
 
 </LinearLayout>
