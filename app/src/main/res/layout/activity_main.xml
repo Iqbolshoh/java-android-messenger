@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F5F5F5">
 
     <EditText
         android:id="@+id/editTextPrompt"
@@ -11,7 +12,13 @@
         android:layout_height="wrap_content"
         android:hint="Enter your prompt"
         android:inputType="textMultiLine"
-        android:minLines="3" />
+        android:minLines="3"
+        android:background="@android:drawable/editbox_background"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
 
     <Button
         android:id="@+id/buttonSend"
@@ -19,7 +26,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:text="Send" />
+        android:text="Send"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="#3F51B5"
+        android:layout_marginBottom="12dp"
+        android:elevation="4dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -34,6 +50,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:elevation="2dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#E0E0E0"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>
