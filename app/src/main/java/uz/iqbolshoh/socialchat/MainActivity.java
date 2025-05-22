@@ -1,6 +1,7 @@
 package uz.iqbolshoh.socialchat;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -34,16 +35,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);  // Sizning XML faylingiz
 
+        // Viewlarni bog‘lash
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSend = findViewById(R.id.buttonSend);
         buttonClear = findViewById(R.id.buttonClear);
         layoutMessages = findViewById(R.id.layoutMessages);
         scrollViewChat = findViewById(R.id.scrollViewChat);
 
+        // DB helper
         dbHelper = new MessageDatabaseHelper(this);
 
+        // Style beramiz (background, border radius)
+        setCustomBackgrounds();
+
+        // Send tugmasi bosilganda
         buttonSend.setOnClickListener(v -> {
             String text = editTextMessage.getText().toString().trim();
             if (!text.isEmpty()) {
@@ -54,13 +61,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Clear tugmasi bosilganda
         buttonClear.setOnClickListener(v -> {
             dbHelper.clearAllMessages();
             loadMessages();
             Toast.makeText(this, "Chat tozalandi!", Toast.LENGTH_SHORT).show();
         });
 
+        // Avvaldan xabarlarni yuklab olish
         loadMessages();
+    }
+
+    private void setCustomBackgrounds() {
+        // EditText uchun gradient drawable border radius bilan
+        GradientDrawable editTextBg = new GradientDrawable();
+        editTextBg.setCornerRadius(24f);  // radius (px)
+        editTextBg.setColor(Color.parseColor("#FFFFFF")); // Oq fon
+        editTextBg.setStroke(2, Color.parseColor("#CCCCCC")); // Border rang va qalinligi
+        editTextMessage.setBackground(editTextBg);
+
+        // Clear button uchun qizil background va radius
+        GradientDrawable redBtnBg = new GradientDrawable();
+        redBtnBg.setCornerRadius(24f);
+        redBtnBg.setColor(Color.parseColor("#D32F2F"));
+        buttonClear.setBackground(redBtnBg);
+        buttonClear.setTextColor(Color.WHITE);
+
+        // Send button uchun yashil background va radius
+        GradientDrawable greenBtnBg = new GradientDrawable();
+        greenBtnBg.setCornerRadius(24f);
+        greenBtnBg.setColor(Color.parseColor("#388E3C"));
+        buttonSend.setBackground(greenBtnBg);
+        buttonSend.setTextColor(Color.WHITE);
     }
 
     private void saveUserMessageAndSendApi(String userText) {
@@ -73,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         loadMessages();
 
         executor.execute(() -> {
+            // Bu yerda sizning ApiService orqali javob olish jarayoni
             String apiResponse = ApiService.getGeminiResponse(userText);
 
             runOnUiThread(() -> {
@@ -109,21 +142,28 @@ public class MainActivity extends AppCompatActivity {
         for (Message msg : messages) {
             TextView textView = new TextView(this);
 
-            // TextView uchun stil va joylashuvni beramiz
+            // Background va border radius
+            GradientDrawable bgDrawable = new GradientDrawable();
+            bgDrawable.setCornerRadius(30f);
+            if (msg.isUser) {
+                bgDrawable.setColor(Color.parseColor("#A5D6A7")); // Yashil (user)
+            } else {
+                bgDrawable.setColor(Color.parseColor("#90CAF9")); // Ko‘k (bot)
+            }
+
+            textView.setBackground(bgDrawable);
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     (int)(getResources().getDisplayMetrics().widthPixels * 0.75),
                     ViewGroup.LayoutParams.WRAP_CONTENT
             );
-
             params.setMargins(8, 8, 8, 8);
 
             if (msg.isUser) {
-                textView.setBackgroundColor(Color.parseColor("#A5D6A7")); // Yashil rang
-                params.gravity = Gravity.END; // O'ng tomonga joylashadi
+                params.gravity = Gravity.END;
                 textView.setTextColor(Color.BLACK);
             } else {
-                textView.setBackgroundColor(Color.parseColor("#90CAF9")); // Ko‘k rang
-                params.gravity = Gravity.START; // Chap tomonga joylashadi
+                params.gravity = Gravity.START;
                 textView.setTextColor(Color.BLACK);
             }
 
@@ -136,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
             layoutMessages.addView(textView);
         }
 
-        // ScrollView pastga siljishini ta'minlash
         scrollViewChat.post(() -> scrollViewChat.fullScroll(ScrollView.FOCUS_DOWN));
     }
 }
