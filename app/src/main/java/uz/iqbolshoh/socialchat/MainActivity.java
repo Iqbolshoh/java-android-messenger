@@ -1,96 +1,108 @@
 package uz.iqbolshoh.socialchat;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editTextPrompt;
-    private TextView textViewResponse;
+    private EditText editTextMessage;
     private Button buttonSend;
-    private Button buttonClear;
-    private ProgressBar progressBar;
+    private TextView textViewChat;
+
+    private MessageDatabaseHelper dbHelper;
+
     private final Executor executor = Executors.newSingleThreadExecutor();
-    private final Handler handler = new Handler(Looper.getMainLooper());
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
-        editTextPrompt = findViewById(R.id.editTextPrompt);
-        textViewResponse = findViewById(R.id.textViewResponse);
+        editTextMessage = findViewById(R.id.editTextMessage);
         buttonSend = findViewById(R.id.buttonSend);
-        buttonClear = findViewById(R.id.buttonClear);
-        progressBar = findViewById(R.id.progressBar);
+        textViewChat = findViewById(R.id.textViewChat);
 
-        sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-        boolean darkMode = sharedPreferences.getBoolean("dark_mode", false);
-        AppCompatDelegate.setDefaultNightMode(darkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        dbHelper = new MessageDatabaseHelper(this);
 
         buttonSend.setOnClickListener(v -> {
-            String prompt = editTextPrompt.getText().toString().trim();
-            if (!prompt.isEmpty()) {
-                sendRequestToGemini(prompt);
+            String text = editTextMessage.getText().toString().trim();
+            if (!text.isEmpty()) {
+                saveUserMessageAndSendApi(text);
+                editTextMessage.setText("");
             } else {
-                showToast("Please enter a prompt");
+                Toast.makeText(this, "Xabar kiriting, aka!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        buttonClear.setOnClickListener(v -> editTextPrompt.setText(""));
+        loadMessages();
     }
 
-    private void sendRequestToGemini(String prompt) {
-        // Show loading state
-        progressBar.setVisibility(View.VISIBLE);
-        buttonSend.setEnabled(false);
-        textViewResponse.setText("");
+    private void saveUserMessageAndSendApi(String userText) {
+        // User xabarini DB ga saqlaymiz
+        Message userMessage = new Message();
+        userMessage.content = userText;
+        userMessage.isUser = true;
+        userMessage.timestamp = System.currentTimeMillis();
+        dbHelper.addMessage(userMessage);
 
+        loadMessages(); // Yangi user xabarini ko'rsatish uchun
+
+        // API ga so'rov yuborish, javobni olish va DB ga saqlash
         executor.execute(() -> {
-            String response = ApiService.getGeminiResponse(prompt);
+            String apiResponse = ApiService.getGeminiResponse(userText);
 
-            handler.post(() -> {
-                progressBar.setVisibility(View.GONE);
-                buttonSend.setEnabled(true);
-
+            runOnUiThread(() -> {
                 try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    if (jsonResponse.has("error")) {
-                        String error = jsonResponse.getString("error");
-                        textViewResponse.setText("Error: " + error);
-                        showToast(error);
-                    } else {
-                        String resultText = jsonResponse.getString("text");
-                        textViewResponse.setText(resultText);
+                    JSONObject jsonObject = new JSONObject(apiResponse);
+
+                    if (jsonObject.has("error")) {
+                        Toast.makeText(MainActivity.this, "API Error: " + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
+                        return;
                     }
+
+                    String botReply = jsonObject.optString("text", "Bot javobi topilmadi");
+
+                    // Bot javobini DB ga saqlash
+                    Message botMessage = new Message();
+                    botMessage.content = botReply;
+                    botMessage.isUser = false;
+                    botMessage.timestamp = System.currentTimeMillis();
+                    dbHelper.addMessage(botMessage);
+
+                    loadMessages(); // Bot javobini ko'rsatish
+
                 } catch (JSONException e) {
-                    textViewResponse.setText("Error parsing response");
-                    showToast("Failed to parse response");
+                    Toast.makeText(MainActivity.this, "Javobni tahlil qilishda xatolik", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
             });
         });
     }
 
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    private void loadMessages() {
+        List<Message> messages = dbHelper.getAllMessages();
+        StringBuilder chatText = new StringBuilder();
+
+        for (Message msg : messages) {
+            if (msg.isUser) {
+                chatText.append("Siz: ").append(msg.content).append("\n");
+            } else {
+                chatText.append("Bot: ").append(msg.content).append("\n");
+            }
+        }
+
+        textViewChat.setText(chatText.toString());
     }
 }
