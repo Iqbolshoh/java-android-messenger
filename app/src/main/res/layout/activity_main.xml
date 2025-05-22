@@ -6,13 +6,6 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
-    <!-- Gradient background uchun container -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/transparent" />
-
     <!-- Prompt input -->
     <EditText
         android:id="@+id/editTextPrompt"
@@ -21,44 +14,32 @@
         android:hint="Enter your prompt"
         android:inputType="textMultiLine"
         android:minLines="3"
+        android:maxLines="6"
         android:padding="12dp"
         android:textColor="#000000"
         android:textColorHint="#888888"
         android:textSize="18sp"
-        android:layout_marginBottom="12dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:backgroundTint="#BDBDBD"
-        android:background="@null"
-        android:elevation="2dp"
-        android:layout_marginTop="16dp"
-        android:drawablePadding="10dp" />
+        android:layout_marginBottom="16dp" />
 
-    <!-- Send button with inline selector -->
+    <!-- Send button -->
     <Button
         android:id="@+id/buttonSend"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         android:text="Send"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:elevation="4dp"
-        android:background="@android:color/transparent"
-        android:stateListAnimator="@null"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless" />
+        android:backgroundTint="#3F51B5"
+        android:padding="12dp"
+        android:elevation="4dp" />
 
     <!-- Loading bar -->
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:visibility="gone" />
 
     <!-- Response output -->
@@ -66,14 +47,11 @@
         android:id="@+id/textViewResponse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:padding="12dp"
-        android:background="#FFFFFF"
+        android:background="#F5F5F5"
         android:textColor="#333333"
         android:textSize="16sp"
-        android:elevation="2dp"
-        android:layout_marginBottom="8dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:backgroundTint="#E0E0E0" />
+        android:elevation="2dp" />
 
 </LinearLayout>
