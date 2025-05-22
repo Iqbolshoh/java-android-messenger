@@ -1,8 +1,13 @@
 package uz.iqbolshoh.socialchat;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +23,9 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private EditText editTextMessage;
-    private Button buttonSend, buttonClear;  // Clear tugma qo'shildi
-    private TextView textViewChat;
+    private Button buttonSend, buttonClear;
+    private LinearLayout layoutMessages;
+    private ScrollView scrollViewChat;
 
     private MessageDatabaseHelper dbHelper;
 
@@ -32,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSend = findViewById(R.id.buttonSend);
-        buttonClear = findViewById(R.id.buttonClear);  // Clear tugmasini bog'lash
-        textViewChat = findViewById(R.id.textViewChat);
+        buttonClear = findViewById(R.id.buttonClear);
+        layoutMessages = findViewById(R.id.layoutMessages);
+        scrollViewChat = findViewById(R.id.scrollViewChat);
 
         dbHelper = new MessageDatabaseHelper(this);
 
@@ -48,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         buttonClear.setOnClickListener(v -> {
-            dbHelper.clearAllMessages();  // DB ichidagi barcha xabarlarni o'chirish
-            loadMessages();               // UI ni yangilash
+            dbHelper.clearAllMessages();
+            loadMessages();
             Toast.makeText(this, "Chat tozalandi!", Toast.LENGTH_SHORT).show();
         });
 
@@ -57,16 +64,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveUserMessageAndSendApi(String userText) {
-        // User xabarini DB ga saqlash
         Message userMessage = new Message();
         userMessage.content = userText;
         userMessage.isUser = true;
         userMessage.timestamp = System.currentTimeMillis();
         dbHelper.addMessage(userMessage);
 
-        loadMessages(); // Yangi user xabarini ko'rsatish
+        loadMessages();
 
-        // API ga so'rov yuborish, javobni olish va DB ga saqlash
         executor.execute(() -> {
             String apiResponse = ApiService.getGeminiResponse(userText);
 
@@ -81,14 +86,13 @@ public class MainActivity extends AppCompatActivity {
 
                     String botReply = jsonObject.optString("text", "Bot javobi topilmadi");
 
-                    // Bot javobini DB ga saqlash
                     Message botMessage = new Message();
                     botMessage.content = botReply;
                     botMessage.isUser = false;
                     botMessage.timestamp = System.currentTimeMillis();
                     dbHelper.addMessage(botMessage);
 
-                    loadMessages(); // Bot javobini ko'rsatish
+                    loadMessages();
 
                 } catch (JSONException e) {
                     Toast.makeText(MainActivity.this, "Javobni tahlil qilishda xatolik", Toast.LENGTH_LONG).show();
@@ -99,17 +103,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadMessages() {
+        layoutMessages.removeAllViews();
         List<Message> messages = dbHelper.getAllMessages();
-        StringBuilder chatText = new StringBuilder();
 
         for (Message msg : messages) {
+            TextView textView = new TextView(this);
+
+            // TextView uchun stil va joylashuvni beramiz
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    (int)(getResources().getDisplayMetrics().widthPixels * 0.75),
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+
+            params.setMargins(8, 8, 8, 8);
+
             if (msg.isUser) {
-                chatText.append("Siz: ").append(msg.content).append("\n");
+                textView.setBackgroundColor(Color.parseColor("#A5D6A7")); // Yashil rang
+                params.gravity = Gravity.END; // O'ng tomonga joylashadi
+                textView.setTextColor(Color.BLACK);
             } else {
-                chatText.append("Bot: ").append(msg.content).append("\n");
+                textView.setBackgroundColor(Color.parseColor("#90CAF9")); // Ko‘k rang
+                params.gravity = Gravity.START; // Chap tomonga joylashadi
+                textView.setTextColor(Color.BLACK);
             }
+
+            textView.setLayoutParams(params);
+            textView.setPadding(24, 16, 24, 16);
+            textView.setText(msg.content);
+            textView.setTextSize(16);
+            textView.setMaxLines(10);
+
+            layoutMessages.addView(textView);
         }
 
-        textViewChat.setText(chatText.toString());
+        // ScrollView pastga siljishini ta'minlash
+        scrollViewChat.post(() -> scrollViewChat.fullScroll(ScrollView.FOCUS_DOWN));
     }
 }

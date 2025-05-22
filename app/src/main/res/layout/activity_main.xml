@@ -2,36 +2,51 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewChat"
+    <ScrollView
+        android:id="@+id/scrollViewChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="16sp"
-        android:background="#eee"
-        android:padding="8dp"
-        android:scrollbars="vertical" />
+        android:fillViewport="true"
+        android:background="#F5F5F5">
+
+        <LinearLayout
+            android:id="@+id/layoutMessages"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp" />
+    </ScrollView>
 
     <EditText
         android:id="@+id/editTextMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Xabar kiriting..." />
+        android:hint="Xabar kiriting..."
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/buttonClear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tozalash" />
+        android:text="Tozalash"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#D32F2F"
+        android:textColor="#fff" />
 
     <Button
         android:id="@+id/buttonSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Yuborish" />
+        android:text="Yuborish"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#388E3C"
+        android:textColor="#fff" />
 
 </LinearLayout>
