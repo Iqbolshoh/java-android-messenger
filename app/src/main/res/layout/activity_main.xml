@@ -31,6 +31,19 @@
         android:textSize="18sp"
         android:backgroundTint="#3F51B5"
         android:padding="12dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Clear button -->
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:backgroundTint="#FF4081"
+        android:padding="12dp"
         android:elevation="4dp" />
 
     <!-- Loading bar -->

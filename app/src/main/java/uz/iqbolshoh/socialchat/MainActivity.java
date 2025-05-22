@@ -1,5 +1,6 @@
 package uz.iqbolshoh.socialchat;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,9 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextPrompt;
     private TextView textViewResponse;
     private Button buttonSend;
+    private Button buttonClear;
     private ProgressBar progressBar;
     private final Executor executor = Executors.newSingleThreadExecutor();
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
         editTextPrompt = findViewById(R.id.editTextPrompt);
         textViewResponse = findViewById(R.id.textViewResponse);
         buttonSend = findViewById(R.id.buttonSend);
+        buttonClear = findViewById(R.id.buttonClear);
         progressBar = findViewById(R.id.progressBar);
+
+        sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean darkMode = sharedPreferences.getBoolean("dark_mode", false);
+        AppCompatDelegate.setDefaultNightMode(darkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
 
         buttonSend.setOnClickListener(v -> {
             String prompt = editTextPrompt.getText().toString().trim();
@@ -46,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 showToast("Please enter a prompt");
             }
         });
+
+        buttonClear.setOnClickListener(v -> editTextPrompt.setText(""));
     }
 
     private void sendRequestToGemini(String prompt) {
