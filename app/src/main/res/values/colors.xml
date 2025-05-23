@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Default Material colors -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +8,20 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Our custom colors -->
+    <color name="colorPrimary">#0F2027</color>
+    <color name="colorPrimaryDark">#0A161B</color>
+    <color name="colorAccent">#4CAF50</color>
+
+    <color name="user_message">#4CAF50</color>
+    <color name="bot_message">#2196F3</color>
+    <color name="background_dark">#1E2632</color>
+    <color name="input_background">#2A3445</color>
+
+    <!-- Additional colors for text and UI elements -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#A0A8B8</color>
+    <color name="error_color">#F44336</color>
+    <color name="success_color">#4CAF50</color>
 </resources>

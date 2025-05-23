@@ -1,60 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Main layout for the SocialChat app's chat interface -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0F7FA">
+    android:background="@drawable/background_gradient">
 
-    <!-- Scrollable area for displaying chat messages -->
+    <!-- App Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_chat"
+            android:tint="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SocialChat"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Chat Messages Area -->
     <ScrollView
         android:id="@+id/scrollViewChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true"
-        android:background="#FFFFFF">
+        android:background="#1E2632"
+        android:padding="8dp">
 
-        <!-- Container for individual message views -->
         <LinearLayout
             android:id="@+id/layoutMessages"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp" />
+            android:padding="8dp"/>
     </ScrollView>
 
-    <!-- Input field for typing messages -->
-    <EditText
-        android:id="@+id/editTextMessage"
+    <!-- Input Area -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Type your message..."
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:background="#1E2632"
         android:padding="12dp"
-        android:background="#B2EBF2"
-        android:layout_marginTop="8dp"
-        android:textColor="#004D40" />
+        android:clipToPadding="false"
+        android:elevation="8dp">
 
-    <!-- Button to clear chat history -->
-    <Button
-        android:id="@+id/buttonClear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Clear Chat"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#FF5722"
-        android:textColor="#FFFFFF" />
+        <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type your message..."
+            android:padding="16dp"
+            android:background="@drawable/edittext_background"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A0A8B8"
+            android:textSize="16sp"
+            android:maxLines="4"/>
 
-    <!-- Button to send a message -->
-    <Button
-        android:id="@+id/buttonSend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send Message"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#00796B"
-        android:textColor="#FFFFFF" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:paddingHorizontal="4dp">
 
+            <Button
+                android:id="@+id/buttonClear"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Clear"
+                android:background="@drawable/button_clear_background"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
+                android:layout_marginEnd="8dp"
+                android:paddingHorizontal="24dp"/>
+
+            <Button
+                android:id="@+id/buttonSend"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Send"
+                android:background="@drawable/button_send_background"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
+                android:paddingHorizontal="24dp"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
