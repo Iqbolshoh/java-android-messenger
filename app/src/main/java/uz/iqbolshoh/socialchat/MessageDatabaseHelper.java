@@ -10,28 +10,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper class for managing the local SQLite database that stores chat messages.
+ * Manages the SQLite database for storing and retrieving chat messages.
+ * Provides methods to add, retrieve, and clear messages.
  */
 public class MessageDatabaseHelper extends SQLiteOpenHelper {
 
-    // Database configuration
+    // Database configuration constants
     private static final String DATABASE_NAME = "chat.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Table and columns
+    // Table and column names
     private static final String TABLE_MESSAGES = "messages";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_CONTENT = "content";
     private static final String COLUMN_IS_USER = "isUser";
     private static final String COLUMN_TIMESTAMP = "timestamp";
 
+    /**
+     * Constructor for the database helper.
+     *
+     * @param context The application context.
+     */
     public MessageDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     /**
-     * Called when the database is created for the first time.
-     * Creates the messages table.
+     * Creates the messages table when the database is first initialized.
+     *
+     * @param db The SQLite database instance.
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -45,7 +52,11 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Called when the database needs to be upgraded.
+     * Handles database upgrades by dropping and recreating the messages table.
+     *
+     * @param db         The SQLite database instance.
+     * @param oldVersion The old database version.
+     * @param newVersion The new database version.
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -55,7 +66,8 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * Inserts a new message into the database.
-     * @param message The message object to be inserted.
+     *
+     * @param message The message object to insert.
      */
     public void addMessage(Message message) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -69,7 +81,8 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Retrieves all messages from the database, sorted by timestamp in ascending order.
+     * Retrieves all messages from the database, ordered by timestamp (ascending).
+     *
      * @return A list of Message objects.
      */
     public List<Message> getAllMessages() {

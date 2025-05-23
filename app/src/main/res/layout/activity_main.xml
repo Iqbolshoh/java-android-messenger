@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Main layout for the SocialChat app's chat interface -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="12dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#E0F7FA">
 
-    <!-- Chat Scroll Area -->
+    <!-- Scrollable area for displaying chat messages -->
     <ScrollView
         android:id="@+id/scrollViewChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true"
-        android:background="#F5F5F5">
+        android:background="#FFFFFF">
 
+        <!-- Container for individual message views -->
         <LinearLayout
             android:id="@+id/layoutMessages"
             android:orientation="vertical"
@@ -23,34 +26,35 @@
             android:padding="8dp" />
     </ScrollView>
 
-    <!-- Message Input Field -->
+    <!-- Input field for typing messages -->
     <EditText
         android:id="@+id/editTextMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter a message..."
+        android:hint="Type your message..."
         android:padding="12dp"
-        android:background="@android:drawable/edit_text"
-        android:layout_marginTop="8dp" />
+        android:background="#B2EBF2"
+        android:layout_marginTop="8dp"
+        android:textColor="#004D40" />
 
-    <!-- Clear Chat Button -->
+    <!-- Button to clear chat history -->
     <Button
         android:id="@+id/buttonClear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Clear Chat"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#D32F2F"
+        android:backgroundTint="#FF5722"
         android:textColor="#FFFFFF" />
 
-    <!-- Send Message Button -->
+    <!-- Button to send a message -->
     <Button
         android:id="@+id/buttonSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send"
+        android:text="Send Message"
         android:layout_marginTop="4dp"
-        android:backgroundTint="#388E3C"
+        android:backgroundTint="#00796B"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>
