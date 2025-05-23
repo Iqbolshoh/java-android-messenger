@@ -9,13 +9,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Helper class for managing the local SQLite database that stores chat messages.
+ */
 public class MessageDatabaseHelper extends SQLiteOpenHelper {
 
+    // Database configuration
     private static final String DATABASE_NAME = "chat.db";
     private static final int DATABASE_VERSION = 1;
 
+    // Table and columns
     private static final String TABLE_MESSAGES = "messages";
-
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_CONTENT = "content";
     private static final String COLUMN_IS_USER = "isUser";
@@ -25,12 +29,10 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void clearAllMessages() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_MESSAGES, null, null);
-        db.close();
-    }
-
+    /**
+     * Called when the database is created for the first time.
+     * Creates the messages table.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_MESSAGES_TABLE = "CREATE TABLE " + TABLE_MESSAGES + "("
@@ -42,13 +44,19 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_MESSAGES_TABLE);
     }
 
+    /**
+     * Called when the database needs to be upgraded.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGES);
         onCreate(db);
     }
 
-    // Xabar qo'shish
+    /**
+     * Inserts a new message into the database.
+     * @param message The message object to be inserted.
+     */
     public void addMessage(Message message) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -60,12 +68,14 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Barcha xabarlarni olish (timestamp bo'yicha o'sish tartibida)
+    /**
+     * Retrieves all messages from the database, sorted by timestamp in ascending order.
+     * @return A list of Message objects.
+     */
     public List<Message> getAllMessages() {
         List<Message> messages = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM " + TABLE_MESSAGES + " ORDER BY " + COLUMN_TIMESTAMP + " ASC";
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -80,9 +90,19 @@ public class MessageDatabaseHelper extends SQLiteOpenHelper {
                 messages.add(message);
             } while (cursor.moveToNext());
         }
+
         cursor.close();
         db.close();
 
         return messages;
+    }
+
+    /**
+     * Deletes all messages from the database.
+     */
+    public void clearAllMessages() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_MESSAGES, null, null);
+        db.close();
     }
 }

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Chat Scroll Area -->
     <ScrollView
         android:id="@+id/scrollViewChat"
         android:layout_width="match_parent"
@@ -22,31 +23,34 @@
             android:padding="8dp" />
     </ScrollView>
 
+    <!-- Message Input Field -->
     <EditText
         android:id="@+id/editTextMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Xabar kiriting..."
+        android:hint="Enter a message..."
         android:padding="12dp"
         android:background="@android:drawable/edit_text"
         android:layout_marginTop="8dp" />
 
+    <!-- Clear Chat Button -->
     <Button
         android:id="@+id/buttonClear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tozalash"
+        android:text="Clear Chat"
         android:layout_marginTop="8dp"
         android:backgroundTint="#D32F2F"
-        android:textColor="#fff" />
+        android:textColor="#FFFFFF" />
 
+    <!-- Send Message Button -->
     <Button
         android:id="@+id/buttonSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Yuborish"
+        android:text="Send"
         android:layout_marginTop="4dp"
         android:backgroundTint="#388E3C"
-        android:textColor="#fff" />
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>
