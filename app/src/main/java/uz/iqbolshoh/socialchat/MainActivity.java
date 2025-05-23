@@ -1,10 +1,15 @@
 package uz.iqbolshoh.socialchat;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MessageDatabaseHelper dbHelper;
     private final Executor executor = Executors.newSingleThreadExecutor();
+    private boolean isFirstInput = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +54,14 @@ public class MainActivity extends AppCompatActivity {
         // Initialize database
         dbHelper = new MessageDatabaseHelper(this);
 
+        // Set up EditText animation
+        setupEditTextAnimation();
+
         // Set up button listeners
         buttonSend.setOnClickListener(v -> {
             String text = editTextMessage.getText().toString().trim();
             if (!text.isEmpty()) {
+                animateSendButton();
                 saveUserMessageAndSendApi(text);
                 editTextMessage.setText("");
             } else {
@@ -75,6 +85,42 @@ public class MainActivity extends AppCompatActivity {
 
         // Load existing messages
         loadMessages();
+    }
+
+    private void setupEditTextAnimation() {
+        editTextMessage.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && isFirstInput) {
+                isFirstInput = false;
+                ObjectAnimator scaleX = ObjectAnimator.ofFloat(editTextMessage, "scaleX", 1.0f, 1.05f, 1.0f);
+                ObjectAnimator scaleY = ObjectAnimator.ofFloat(editTextMessage, "scaleY", 1.0f, 1.05f, 1.0f);
+                ObjectAnimator alpha = ObjectAnimator.ofFloat(editTextMessage, "alpha", 0.7f, 1.0f);
+
+                scaleX.setDuration(300);
+                scaleY.setDuration(300);
+                alpha.setDuration(300);
+
+                scaleX.setInterpolator(new OvershootInterpolator());
+                scaleY.setInterpolator(new OvershootInterpolator());
+
+                scaleX.start();
+                scaleY.start();
+                alpha.start();
+            }
+        });
+    }
+
+    private void animateSendButton() {
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(buttonSend, "scaleX", 1.0f, 1.2f, 1.0f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(buttonSend, "scaleY", 1.0f, 1.2f, 1.0f);
+
+        scaleX.setDuration(200);
+        scaleY.setDuration(200);
+
+        scaleX.setInterpolator(new OvershootInterpolator());
+        scaleY.setInterpolator(new OvershootInterpolator());
+
+        scaleX.start();
+        scaleY.start();
     }
 
     private void saveUserMessageAndSendApi(String userText) {
@@ -158,7 +204,15 @@ public class MainActivity extends AppCompatActivity {
             textView.setTextSize(16);
             textView.setMaxLines(20);
 
+            // Add animation for new messages
+            textView.setAlpha(0f);
+            textView.setTranslationY(50f);
             layoutMessages.addView(textView);
+            textView.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(300)
+                    .start();
         }
 
         // Scroll to bottom
