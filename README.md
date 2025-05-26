@@ -45,17 +45,6 @@
   <img src="https://img.shields.io/badge/Gemini%20API-%234285F4.svg?style=for-the-badge&logo=google&logoColor=white" alt="Gemini API">
 </div>
 
----
-
-## 📌 Future Plans
-
-🛡️ Add user authentication
-☁️ Cloud sync with Firebase
-🧠 Improve context memory for multi-turn conversations
-🌓 Add dark/light mode support
-
----
-
 ## 📜 License
 This project is open-source and available under the **MIT License**.
 
