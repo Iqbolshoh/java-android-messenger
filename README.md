@@ -4,13 +4,13 @@
 
 ## 📸 Preview
 ### 🖥️ Desktop
-![Desktop Preview](./src/images/desktop.png)
+![Desktop Preview](./screenshots/desktop.png)
 
 ### 📱 Mobile
 <div style="display: flex; justify-content: space-between; gap: 10px;">
-  <img src="./1.png" alt="App Screenshot 1" style="width: 33.3%;" />
-  <img src="./2.png" alt="App Screenshot 2" style="width: 33.3%;" />
-  <img src="./3.png" alt="App Screenshot 3" style="width: 33.3%;" />
+  <img src="./screenshots/1.png" alt="App Screenshot 1" style="width: 33.3%;" />
+  <img src="./screenshots/2.png" alt="App Screenshot 2" style="width: 33.3%;" />
+  <img src="./screenshots/3.png" alt="App Screenshot 3" style="width: 33.3%;" />
 </div>
 
 ---
