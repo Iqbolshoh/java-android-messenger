@@ -7,7 +7,7 @@
 ![Desktop Preview](./screenshots/desktop.png)
 
 ### 📱 Mobile
-<div style="display: flex; justify-content: space-between; gap: 10px;">
+<div style="text-align: center;">
   <img src="./screenshots/1.jpg" alt="App Screenshot 1" style="width: 49%;" />
   <img src="./screenshots/2.jpg" alt="App Screenshot 2" style="width: 49%;" />
 </div>
