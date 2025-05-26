@@ -3,8 +3,15 @@
 **Java Android Messenger** is a smart, AI-powered chat application built using **Java** and **SQLite (Room DB)** for Android. It uses the **Gemini API** to provide real-time responses to every user prompt, simulating a real conversation between user and bot.
 
 ## 📸 Preview
+### 🖥️ Desktop
+![Desktop Preview](./src/images/desktop.png)
 
-![App Screenshot](./banner.png)
+### 📱 Mobile
+<div style="display: flex; justify-content: space-between; gap: 10px;">
+  <img src="./banner-1.png" alt="App Screenshot 1" style="width: 33.3%;" />
+  <img src="./banner-2.png" alt="App Screenshot 2" style="width: 33.3%;" />
+  <img src="./banner-3.png" alt="App Screenshot 3" style="width: 33.3%;" />
+</div>
 
 ---
 
