@@ -8,9 +8,9 @@
 
 ### 📱 Mobile
 <div style="display: flex; justify-content: space-between; gap: 10px;">
-  <img src="./banner-1.png" alt="App Screenshot 1" style="width: 33.3%;" />
-  <img src="./banner-2.png" alt="App Screenshot 2" style="width: 33.3%;" />
-  <img src="./banner-3.png" alt="App Screenshot 3" style="width: 33.3%;" />
+  <img src="./1.png" alt="App Screenshot 1" style="width: 33.3%;" />
+  <img src="./2.png" alt="App Screenshot 2" style="width: 33.3%;" />
+  <img src="./3.png" alt="App Screenshot 3" style="width: 33.3%;" />
 </div>
 
 ---
