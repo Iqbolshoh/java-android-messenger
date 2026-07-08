@@ -1,122 +1,102 @@
 # 💬 Java Android Messenger
 
-**Java Android Messenger** is a smart, AI-powered chat application built using **Java** and **SQLite (Room DB)** for Android. It uses the **Gemini API** to provide real-time responses to every user prompt, simulating a real conversation between user and bot.
+**Java Android Messenger** (app name: **Social Chat**) is an **AI-powered chat app for Android**, built with **Java**. Every message you send is forwarded to **Google's Gemini API**, and the reply is shown as a chat bubble — with the full conversation history persisted locally in a **SQLite** database.
 
-## 📸 Preview
-### 🖥️ Desktop
-![Desktop Preview](./screenshots/desktop.png)
-
-### 📱 Mobile
-<div style="text-align: center;">
-  <img src="./screenshots/1.jpg" alt="App Screenshot 1" style="width: 49%;" />
-  <img src="./screenshots/2.jpg" alt="App Screenshot 2" style="width: 49%;" />
-</div>
-
----
-
-## 🚀 Features
-
-🤖 **Gemini AI Responses** – Get real-time answers using Google’s Gemini API
-💬 **Interactive Chat** – Smooth message exchange between user and bot
-📱 **Modern UI** – Beautiful and responsive chat interface
-📦 **Room Database** – Stores all messages locally using SQLite Room DB
-✨ **Dynamic Styling** – User and bot messages shown in different styles
-🧠 **Typing Animations** – Realistic bot typing effect
-
----
-
-## 🎯 How to Run
-
-1. Clone the repository
-
-   ```bash
-   git clone https://github.com/Iqbolshoh/java-android-messenger.git
-   cd java-android-messenger
-   ```
-2. Open in **Android Studio**
-3. Sync Gradle and build the project
-4. Run on an emulator or a physical device
-
-> ⚠ Make sure to add your own **Gemini API Key** in the `ApiService.java` file.
-
----
-
-## 🛠 Technologies Used
-
-<div style="display: flex; flex-wrap: wrap; gap: 5px;">
+<p align="left">
   <img src="https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
   <img src="https://img.shields.io/badge/Android-%233DDC84.svg?style=for-the-badge&logo=android&logoColor=white" alt="Android">
   <img src="https://img.shields.io/badge/SQLite-%23003B57.svg?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
-  <img src="https://img.shields.io/badge/Room-%23FF6F00.svg?style=for-the-badge&logo=google&logoColor=white" alt="Room DB">
   <img src="https://img.shields.io/badge/Gemini%20API-%234285F4.svg?style=for-the-badge&logo=google&logoColor=white" alt="Gemini API">
-</div>
+  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
+</p>
+
+## 📚 Table of Contents
+
+- [Features](#-features)
+- [Preview](#-preview)
+- [Project Structure](#-project-structure)
+- [Installation Guide](#️-installation-guide)
+- [Technologies Used](#-technologies-used)
+- [License](#-license)
+- [Contributing](#-contributing)
+- [Connect with Me](#-connect-with-me)
+
+## ✨ Features
+
+✅ **Gemini AI replies:** Every message is sent to Google's Gemini API and answered in real time.
+✅ **Persistent history:** All messages are stored locally in a SQLite database and reloaded on launch.
+✅ **Chat-style UI:** User and bot messages are rendered as distinct, rounded message bubbles.
+✅ **Clear conversation:** Wipe the entire chat history with a single confirmation dialog.
+✅ **Smooth animations:** Input field and send button use subtle scale/overshoot animations, and new messages fade and slide in.
+✅ **Automatic retries:** Failed requests due to rate limiting are retried automatically before surfacing an error.
+
+## 👀 Preview
+
+> 📸 Screenshots of the running app aren't available in this repository yet — build and run the project in Android Studio to see it in action (see [Installation Guide](#️-installation-guide) below).
+
+## 📂 Project Structure
+
+```
+java-android-messenger/
+├── app/
+│   └── src/main/
+│       ├── java/uz/iqbolshoh/socialchat/
+│       │   ├── MainActivity.java              # Chat screen: input handling, message list, animations
+│       │   ├── ApiService.java                # Gemini API requests, retries, and response parsing
+│       │   ├── Message.java                   # Message data model
+│       │   └── MessageDatabaseHelper.java     # SQLite schema and CRUD operations
+│       ├── res/
+│       │   ├── layout/activity_main.xml       # Chat screen layout
+│       │   ├── drawable/                       # Message bubble, button, and background styles
+│       │   └── values/                         # App name, colors, and theme
+│       └── AndroidManifest.xml
+├── build.gradle
+└── README.md
+```
+
+## ⚙️ Installation Guide 🛠️
+
+### 1️⃣ Clone the Repository 📥
+```bash
+git clone https://github.com/Iqbolshoh/java-android-messenger.git
+```
+
+### 2️⃣ Open in Android Studio 📂
+Open the `java-android-messenger` folder as a project and let Gradle sync.
+
+### 3️⃣ Add Your Gemini API Key 🔑
+Open `app/src/main/java/uz/iqbolshoh/socialchat/ApiService.java` and replace the placeholder with your own key:
+```java
+private static final String API_KEY = "API_KEY";
+```
+> Get a free key from [Google AI Studio](https://aistudio.google.com/).
+
+### 4️⃣ Run the App 🚀
+Select an emulator or connect a physical device, then click **Run**.
+
+## 🖥 Technologies Used
+![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Android](https://img.shields.io/badge/Android-%233DDC84.svg?style=for-the-badge&logo=android&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-%23003B57.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Gemini API](https://img.shields.io/badge/Gemini%20API-%234285F4.svg?style=for-the-badge&logo=google&logoColor=white)
 
 ## 📜 License
-This project is open-source and available under the **MIT License**.
+This project is open-source and available under the [MIT License](./LICENSE).
 
-## 🤝 Contributing  
+## 🤝 Contributing
 🎯 Contributions are welcome! If you have suggestions or want to enhance the project, feel free to fork the repository and submit a pull request.
 
-## 📬 Connect with Me  
-💬 I love meeting new people and discussing tech, business, and creative ideas. Let’s connect! You can reach me on these platforms:
+## 📬 Connect with Me
+💬 I love meeting new people and discussing tech, business, and creative ideas. Let's connect! You can reach me on these platforms:
 
 <div align="center">
-  <table>
-    <tr>
-      <td>
-        <a href="https://iqbolshoh.uz" target="_blank">
-          <img src="https://img.icons8.com/color/48/domain.png" 
-               height="40" width="40" alt="Website" title="Website" />
-        </a>
-      </td>
-      <td>
-        <a href="mailto:iilhomjonov777@gmail.com" target="_blank">
-          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/gmail.svg"
-               height="40" width="40" alt="Email" title="Email" />
-        </a>
-      </td>
-      <td>
-        <a href="https://github.com/iqbolshoh" target="_blank">
-          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg"
-               height="40" width="40" alt="GitHub" title="GitHub" />
-        </a>
-      </td>
-      <td>
-        <a href="https://www.linkedin.com/in/iqbolshoh/" target="_blank">
-          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/linkedin.svg"
-               height="40" width="40" alt="LinkedIn" title="LinkedIn" />
-        </a>
-      </td>
-      <td>
-        <a href="https://t.me/iqbolshoh_777" target="_blank">
-          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/telegram.svg"
-               height="40" width="40" alt="Telegram" title="Telegram" />
-        </a>
-      </td>
-      <td>
-        <a href="https://wa.me/998997799333" target="_blank">
-          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/whatsapp.svg"
-               height="40" width="40" alt="WhatsApp" title="WhatsApp" />
-        </a>
-      </td>
-      <td>
-        <a href="https://instagram.com/iqbolshoh_777" target="_blank">
-          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg"
-               height="40" width="40" alt="Instagram" title="Instagram" />
-        </a>
-      </td>
-      <td>
-        <a href="https://x.com/iqbolshoh_777" target="_blank">
-          <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white"
-               height="40" width="40" alt="X" title="X (Twitter)" />
-        </a>
-      </td>
-      <td>
-        <a href="https://www.youtube.com/@Iqbolshoh_777" target="_blank">
-          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg"
-               height="40" width="40" alt="YouTube" title="YouTube" />
-        </a>
-      </td>
-    </tr>
-  </table>
+
+[![Website](https://img.shields.io/badge/Website-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://iqbolshoh.uz)
+[![Gmail](https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:iilhomjonov777@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/iqbolshoh)
+[![Telegram](https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/templates_uz_support)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/998776030033)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/iqbolshoh.dev)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@Iqbolshoh_dev)
+
 </div>
